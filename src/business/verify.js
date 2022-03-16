@@ -8,12 +8,12 @@ export const verifyDate =  (res, startdate, starttime, endtime, days) => {
 
     if(verifyDate.isValid() == false){
         errorHandler(res, "field-invalid", "date")
-        return
+        return true
     }
 
     if(days === 0 && starttime > endtime){
         errorHandler(res, "field-invalid", "hours")
-        return
+        return true
     }
 
 }

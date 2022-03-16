@@ -3,6 +3,7 @@ import {Errors} from './Errors.js'
 export const errorHandler = (res, key, field = "") => {
 
     let errors = []
+    console.log(key)
     if(key.errors){
         if(key.errors[0].validatorKey){
             for(let i in key.errors){

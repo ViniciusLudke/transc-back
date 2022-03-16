@@ -7,9 +7,13 @@ import TypeTravel from './routes/TypeTravel.js';
 import Profile from './routes/Profile.js'
 import Occupation from './routes/Occupation.js';
 import Travel from './routes/Travel.js';
+import DateTravel from './routes/DateTravel.js';
 import Period from './routes/Period.js';
 import Professional from './routes/Professional.js';
 import Bus from './routes/Bus.js';
+import Configuration from './routes/Configuration.js';
+
+import App from './routesApp.js'
 
 const router = express.Router();
 
@@ -35,8 +39,14 @@ router.use('/travel', Travel)
 
 router.use('/professional', Professional)
 
+router.use('/datetravel', DateTravel)
+
 router.use('/period', Period)
 
 router.use('/bus', Bus)
+
+router.use('/configuration', Configuration)
+
+router.use('/app', App)
 
 export default router;

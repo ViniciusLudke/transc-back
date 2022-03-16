@@ -1,20 +1,17 @@
 'use strict'
-
+const bcrypt = require('bcrypt')
 module.exports = {
   up: async function up(queryInterface, Sequelize){
     const [results] = await queryInterface.sequelize.query("SELECT schema_name FROM information_schema.schemata where schema_name like '%company%'")
     for(let i in results){
       try{
-        await queryInterface.sequelize.query(`CREATE TABLE ${results[i].schema_name}.travel (
-          idtravel bigserial NOT NULL,
-          travel varchar(128) NOT NULL,
-          active boolean default true,
-          description text,
-          usually smallint default 0,
-          days smallint default 0,
-          idtypetravel bigint NOT NULL,
-          CONSTRAINT pk_travel PRIMARY KEY (idtravel)
-        );`)
+        const phash = await bcrypt.hash('mudar123', 8);
+        await queryInterface.bulkInsert({tableName: 'customer', schema: results[i].schema_name}, [{
+          name: 'Admin',
+          email: 'admin@desbravador.com.br',
+          password: phash,
+          language: 'pt-BR',
+        }], {})
       } catch(e) {
         console.log(e)
         throw e
@@ -26,7 +23,7 @@ module.exports = {
     const [results] = await queryInterface.sequelize.query("SELECT schema_name FROM information_schema.schemata where schema_name like '%company%'")
     for(let i in results){
       try{
-        await queryInterface.dropTable({tableName: 'travel', schema: results[i].schema_name})
+        await queryInterface.bulkDelete({tableName: 'customer', schema:results[i].schema_name}, null, {})
       } catch(e) {
         console.log(e)
         throw e

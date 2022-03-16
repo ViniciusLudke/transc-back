@@ -70,14 +70,13 @@ export const addTravel = async (req, res) => {
     
     verifyValidators(req, res)
 
-    let { travel, active, description, usually, days, idtypetravel,starttime, endtime, startdate} = req.body
-    const resp = verifyDate(res, startdate, starttime, endtime, days)
+    let { travel, active, description, usually, days, idtypetravel} = req.body
 
     let { schema } = res.locals
     let Tr = Travel.schema(schema)
 
     Tr.create({
-        travel, active, description, usually, days, idtypetravel, startdate,  starttime, endtime
+        travel, active, description, usually, days, idtypetravel,
     },{logging: false})
     .then(result => res.status(200).json(result.idtravel))
     .catch(err => errorHandler(res, err))
@@ -89,15 +88,13 @@ export const editActivity = async (req, res) => {
     verifyValidators(req, res)
 
     let {id} = req.params
-    let { travel, active, description, usually, days, idtypetravel, startdate,  starttime, endtime } = req.body
-    
-    verifyDate(res, startdate, starttime, endtime, days)
+    let { travel, active, description, usually, days, idtypetravel } = req.body
 
     let { schema } = res.locals
     let Tr = Travel.schema(schema)
     
     Tr.update({
-        travel, active, description, usually, days, idtypetravel, startdate,  starttime, endtime
+        travel, active, description, usually, days, idtypetravel,
     },{
         where: { idtravel: id },
         logging: false,
@@ -120,20 +117,20 @@ export const deleteTravel = async (req, res) => {
 }
 
 /*
-export const getActivitiesActive = async (req, res) => {
+export const getActivitiesTravel = async (req, res) => {
     let { schema } = res.locals
-    let Ac = Activity.schema(schema)
-    let TypeAct = TypeActivity.schema(schema)
+    let Tr = Travel.schema(schema)
+    let TypeTr = TypeTravel.schema(schema)
 
-    Ac.findAll({
+    Tr.findAll({
         raw: true, logging: false,
-        attributes:['idactivity', 'activity'],
-        order: [['idactivity', 'DESC']],
+        attributes:['idtravel', 'travel'],
+        order: [['travel', 'asc']],
         where:{
             active: true
         },
         include:{
-            model: TypeAct,
+            model: TypeTr,
             attributes:[],
             where:{
                 active: true
@@ -142,4 +139,5 @@ export const getActivitiesActive = async (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => errorHandler(res, err))
-}*/
+}
+*/

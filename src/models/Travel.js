@@ -31,18 +31,6 @@ export default db.define('travel', {
         allowNull: false,
         defaultValue: 0
     },
-    startdate:{
-        type: Sequelize.DATE,
-        allowNull:true
-    },
-    starttime:{
-        type: Sequelize.STRING,
-        allowNull: true
-    },
-    endtime:{
-        type: Sequelize.STRING,
-        allowNull: true
-    },
     idtypetravel: {
         type: Sequelize.BIGINT,
         allowNull: false,
